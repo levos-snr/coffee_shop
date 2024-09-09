@@ -13,10 +13,10 @@ class Order:
         else:
             raise ValueError("Invalid customer or coffee object")
 
-        if isinstance(price, (int, float)) and 1.0 <= price <= 10.0:
+        if isinstance(price, (int, float)) and 1.0 <= price <= 100.0:
             self._price = float(price)
         else:
-            raise ValueError("Price must be a float between 1.0 and 10.0")
+            raise ValueError("Price must be a float between 1.0 and 100.0")
 
         Order.all_orders.append(self)
 
