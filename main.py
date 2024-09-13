@@ -20,7 +20,9 @@ def display_menu():
         "6. View Orders for a Customer",
         "7. Remove Customer",
         "8. Remove Order",
-        "9. Exit"
+        "9. View Coffee Stats",  
+        "10. View Most Loyal Customer for Coffee",  
+        "11. Exit"
     ]
     for option in options:
         console.print(option, style="green")
@@ -150,10 +152,39 @@ def remove_order():
     else:
         console.print(f"No such order found.", style="bold red")
 
+def view_coffee_stats():
+    coffee_name = Prompt.ask("Enter coffee name to view stats").strip()
+    coffee = next((cof for cof in Coffee.all_coffees if cof.name == coffee_name), None)
+
+    if not coffee:
+        console.print(f"Coffee '{coffee_name}' not found.", style="bold red")
+        return
+
+    num_orders = coffee.num_orders()
+    average_price = coffee.average_price()
+    
+    console.print(f"Coffee: {coffee_name}", style="bold green")
+    console.print(f"Number of orders: {num_orders}", style="bold blue")
+    console.print(f"Average price: Ksh. {average_price:.2f}", style="bold blue")
+
+def view_most_aficionado():
+    coffee_name = Prompt.ask("Enter coffee name to find the most loyal customer").strip()
+    coffee = next((cof for cof in Coffee.all_coffees if cof.name == coffee_name), None)
+
+    if not coffee:
+        console.print(f"Coffee '{coffee_name}' not found.", style="bold red")
+        return
+
+    top_customer = Customer.most_aficionado(coffee)
+    if top_customer:
+        console.print(f"The most loyal customer for {coffee_name} is {top_customer.name}.", style="bold green")
+    else:
+        console.print(f"No orders found for {coffee_name}.", style="bold yellow")
+
 def main():
     while True:
         display_menu()
-        choice = Prompt.ask("Choose an option (1-9)").strip()
+        choice = Prompt.ask("Choose an option (1-11)").strip()
 
         if choice == '1':
             create_customer()
@@ -172,10 +203,14 @@ def main():
         elif choice == '8':
             remove_order()
         elif choice == '9':
+            view_coffee_stats()  
+        elif choice == '10':
+            view_most_aficionado()  
+        elif choice == '11':
             console.print("Exiting... Goodbye!", style="bold green")
             break
         else:
-            console.print("Invalid option. Please choose a number between 1 and 9.", style="bold red")
+            console.print("Invalid option. Please choose a number between 1 and 11.", style="bold red")
 
 if __name__ == "__main__":
     main()

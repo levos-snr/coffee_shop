@@ -11,12 +11,12 @@ class Order:
             self._customer = customer
             self._coffee = coffee
         else:
-            raise ValueError("Invalid customer or coffee object")
+            raise ValueError("Invalid object type. Customer and Coffee are required.")
 
         if isinstance(price, (int, float)) and 1.0 <= price <= 100.0:
             self._price = float(price)
         else:
-            raise ValueError("Price must be a float between 1.0 and 100.0")
+            raise ValueError("Price is required and must be a float between 1.0 and 100.0")
 
         Order.all_orders.append(self)
 

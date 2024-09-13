@@ -5,7 +5,7 @@ class Customer:
         if isinstance(name, str) and 1 <= len(name) <= 15:
             self._name = name
         else:
-            raise ValueError("Name must be a string between 1 and 15 characters")
+            raise ValueError("Name is required and must be a string between 1 and 15 characters")
         Customer.all_customers.append(self)
 
     @property
@@ -17,7 +17,7 @@ class Customer:
         if isinstance(new_name, str) and 1 <= len(new_name) <= 15:
             self._name = new_name
         else:
-            raise ValueError("Name must be a string between 1 and 15 characters")
+            raise ValueError("Name is required and must be a string between 1 and 15 characters")
 
     def orders(self):
         from order import Order  

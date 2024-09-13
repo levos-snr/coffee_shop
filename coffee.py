@@ -5,7 +5,7 @@ class Coffee:
         if isinstance(name, str) and len(name) >= 3:
             self._name = name
         else:
-            raise ValueError("Name must be a string with at least 3 characters")
+            raise ValueError("Name is required and must be a string with at least 3 characters")
         Coffee.all_coffees.append(self)
 
     @property
